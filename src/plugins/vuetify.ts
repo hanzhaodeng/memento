@@ -5,12 +5,9 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
-    options: {
-      customProperties: true
-    },
     themes: {
       light: {
-        primary: "#ee44aa",
+        primary: "#000000",
         secondary: "#424242",
         accent: "#82B1FF",
         error: "#FF5252",
