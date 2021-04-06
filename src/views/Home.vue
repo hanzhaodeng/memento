@@ -67,7 +67,7 @@ export default class Home extends Vue {
 .project-title {
   font-family: "Monoton", cursive;
   font-size: 92px;
-  background: -webkit-linear-gradient(#00d672, rgb(148, 3, 129));
+  background: -webkit-linear-gradient(#00d672, rgb(229, 245, 2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

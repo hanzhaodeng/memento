@@ -83,7 +83,7 @@ export default class HelloWorld extends Vue {
   margin: 2px;
 }
 .box.filled.current {
-  background-color: rgb(148, 3, 129);
+  background-color: rgb(229, 245, 2);
 }
 .box.filled {
   opacity: 1;
