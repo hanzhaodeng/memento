@@ -13,10 +13,7 @@
             </h1>
           </template>
           <v-card>
-            <v-date-picker
-              :value="brithday"
-              @input="setBrithday"
-            ></v-date-picker>
+            <v-date-picker v-model="brithday" :max="today"></v-date-picker>
           </v-card>
         </v-dialog>
       </v-col>
@@ -37,25 +34,32 @@ import { DateTime } from "luxon";
   }
 })
 export default class Home extends Vue {
-  private brithday: string | null = localStorage.getItem("bday");
+  brithdayData: string | null = localStorage.getItem("bday");
+  dialog = false;
 
   mounted() {
-    if (this.brithday == undefined) {
+    if (this.brithdayData == undefined) {
       this.dialog = true;
     }
   }
 
-  setBrithday(value: string) {
-    localStorage.setItem("bday", value);
-    this.brithday = value;
+  get brithday(): string {
+    return this.brithdayData ?? this.today;
   }
 
-  dialog = false;
+  set brithday(value: string) {
+    console.log("set");
+    console.log(value);
+    localStorage.setItem("bday", value);
+    this.brithdayData = value;
+  }
+
+  get today(): string {
+    return new Date().toISOString().substr(0, 10);
+  }
 
   get weeks(): number {
-    const birthday = DateTime.fromISO(
-      this.brithday ?? new Date().toISOString().substr(0, 10)
-    );
+    const birthday = DateTime.fromISO(this.brithday);
     return -Math.floor(birthday.diffNow("weeks").toObject().weeks ?? 0);
   }
 }
