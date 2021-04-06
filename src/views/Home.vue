@@ -48,8 +48,6 @@ export default class Home extends Vue {
   }
 
   set brithday(value: string) {
-    console.log("set");
-    console.log(value);
     localStorage.setItem("bday", value);
     this.brithdayData = value;
   }
