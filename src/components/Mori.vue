@@ -34,26 +34,30 @@ export default class HelloWorld extends Vue {
   }
 
   mounted() {
-    this.animate();
+    this.animateGrid().then(() => {
+      this.animateCurrent();
+    });
   }
-  animate() {
-    anime
-      .timeline()
-      .add({
-        targets: ".box.filled",
-        scale: [
-          { value: 0, duration: 0 },
-          { value: 1, easing: "easeInOutQuad", duration: 900 }
-        ],
-        delay: anime.stagger(40, { grid: [104, 40], from: 0 })
-      })
-      .add({
-        targets: ".box.filled.current",
-        scale: [
-          { value: 0, duration: 50 },
-          { value: 1, easing: "easeInOutQuad", duration: 50 }
-        ]
-      });
+  animateCurrent() {
+    anime({
+      targets: ".box.filled.current",
+      scale: [
+        { value: 0.6, easing: "easeInOutQuad", duration: 1000 },
+        { value: 1, easing: "easeInOutQuad", duration: 50 }
+      ],
+      loop: true
+    });
+  }
+
+  animateGrid() {
+    return anime.timeline().add({
+      targets: ".box.filled",
+      scale: [
+        { value: 0, duration: 0 },
+        { value: 1, easing: "easeInOutQuad", duration: 900 }
+      ],
+      delay: anime.stagger(40, { grid: [104, 40], from: 0 })
+    }).finished;
   }
 }
 </script>
@@ -75,7 +79,7 @@ export default class HelloWorld extends Vue {
   left: 0;
   right: 0;
   background-color: #00d672;
-  opacity: 0.1;
+  opacity: 0.09;
   margin: 2px;
 }
 .box.filled.current {

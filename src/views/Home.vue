@@ -37,8 +37,13 @@ import { DateTime } from "luxon";
   }
 })
 export default class Home extends Vue {
-  private brithday: string =
-    localStorage.getItem("bday") ?? new Date().toISOString().substr(0, 10);
+  private brithday: string | null = localStorage.getItem("bday");
+
+  mounted() {
+    if (this.brithday == undefined) {
+      this.dialog = true;
+    }
+  }
 
   setBrithday(value: string) {
     localStorage.setItem("bday", value);
@@ -48,7 +53,9 @@ export default class Home extends Vue {
   dialog = false;
 
   get weeks(): number {
-    const birthday = DateTime.fromISO(this.brithday);
+    const birthday = DateTime.fromISO(
+      this.brithday ?? new Date().toISOString().substr(0, 10)
+    );
     return -Math.floor(birthday.diffNow("weeks").toObject().weeks ?? 0);
   }
 }
